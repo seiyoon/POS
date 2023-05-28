@@ -1,1 +1,3 @@
-export const Home = () => {};
+function Home() {}
+
+export default Home;

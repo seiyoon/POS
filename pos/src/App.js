@@ -1,7 +1,7 @@
 import "./App.css";
 
-import { First } from "./pages/First";
-import { Home } from "./pages/Home";
+import First from "./pages/First";
+import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {

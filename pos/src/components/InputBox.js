@@ -1,8 +1,16 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
 
-export const InputBox = () => {
-  return <StInput placeholder="임시 비밀번호 : 1234" maxLength={4} />;
+export const InputBox = ({ onChange, value, type, placeholder }) => {
+  return (
+    <StInput
+      type={type}
+      value={value}
+      placeholder={placeholder}
+      maxLength={4}
+      onChange={onChange}
+    />
+  );
 };
 
 const StInput = styled.input`

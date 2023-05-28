@@ -1,21 +1,47 @@
 import styled from "styled-components";
-import COLOR from "../styles/color";
+import { COLOR } from "../styles/color";
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { InputBox } from "../components/InputBox";
 import { Button } from "../components/Button";
 import { ReactComponent as Logo } from "../assets/pos_Logo.svg";
 
 function First() {
+  const navigate = useNavigate();
+
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+    if (password !== "1234") {
+      setPasswordError(true);
+    }
+  };
+
+  const onClick = () => {
+    if (password === "1234") {
+      navigate("/home");
+    }
+  };
+
   return (
     <StFirst>
       <Logo className="logo" />
       <StFirstContainer>
         <h1>비밀번호</h1>
         <div className="input">
-          <InputBox />
+          <InputBox
+            placeholder="비밀번호를 입력하세요"
+            value={password}
+            type="password"
+            onChange={handleChangePassword}
+          />
+          {passwordError && <div className="error">비밀번호는 1234입니다.</div>}
         </div>
         <div className="button">
-          <Button>시작하기</Button>
+          <Button onClick={onClick}>시작하기</Button>
         </div>
       </StFirstContainer>
     </StFirst>
@@ -45,7 +71,13 @@ const StFirstContainer = styled.div`
     font-weight: 500;
     font-size: 17px;
   }
+  .error {
+    margin-top: 5px;
+    margin-left: 10px;
+    height: 20px;
+    color: ${COLOR.DARK_GRAY};
+  }
   .button {
-    margin-top: 30px;
+    margin-top: 40px;
   }
 `;

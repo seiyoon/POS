@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useRecoilValue } from "recoil";
 import { totalAmountState } from "../totalAmount";
 import { ReactComponent as Logo } from "../assets/pos_Logo.svg";
@@ -13,14 +15,39 @@ function Pay() {
   const [discountedAmount, setDiscountedAmount] = useState(totalAmount);
   const [isDiscount, setIsDiscount] = useState(false);
 
+  const navigate = useNavigate();
+
   const applyDiscount = () => {
     const discounted = totalAmount * 0.8; // 20% 할인된 금액 계산
     setDiscountedAmount(discounted);
     setIsDiscount((prevIsDiscount) => !prevIsDiscount);
   };
 
+  const handlePayment = () => {
+    toast.success("결제가 완료되었습니다.");
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/open");
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <StPay>
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        closeOnClick // 클릭으로 알람 닫기
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <StPayHeader>
         <Link to="/home">
           <Logo className="logo" />
@@ -45,14 +72,18 @@ function Pay() {
           )}
         </PayAmount>
         <PayButton>
-          <div
+          <button
             className={`discount ${isDiscount ? "cancel" : ""}`}
             onClick={applyDiscount}
           >
-            {isDiscount ? <>임직원 할인 취소</> : <>임직원 할인</>}
-          </div>
-          <div className="card">카드 결제</div>
-          <div className="cash">현금 결제</div>
+            {isDiscount ? <p>임직원 할인 취소</p> : <p>임직원 할인</p>}
+          </button>
+          <button className="card" onClick={handlePayment}>
+            <p>카드 결제</p>
+          </button>
+          <button className="cash" onClick={handlePayment}>
+            <p>현금 결제</p>
+          </button>
         </PayButton>
       </StPayContainer>
     </StPay>
@@ -143,23 +174,25 @@ const PayButton = styled.div`
   height: 20%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  font-family: "SUIT Variable";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
+
+  p {
+    font-family: "SUIT Variable";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+  }
 
   .discount {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: ${COLOR.LIGHT_GRAY};
-    border-right: 1.5px solid ${COLOR.DARK_GRAY};
+    border: none;
     :hover {
       background-color: ${COLOR.MAIN};
       color: ${COLOR.MAIN_WHITE};
     }
   }
-
   .discount.cancel {
     border: none;
     background-color: ${COLOR.MAIN};
@@ -170,7 +203,7 @@ const PayButton = styled.div`
     justify-content: center;
     align-items: center;
     background-color: ${COLOR.LIGHT_GRAY};
-    border-right: 1.5px solid ${COLOR.DARK_GRAY};
+    border: none;
     :hover {
       background-color: ${COLOR.MAIN};
       color: ${COLOR.MAIN_WHITE};
@@ -181,6 +214,7 @@ const PayButton = styled.div`
     justify-content: center;
     align-items: center;
     background-color: ${COLOR.LIGHT_GRAY};
+    border: none;
     :hover {
       background-color: ${COLOR.MAIN};
       color: ${COLOR.MAIN_WHITE};

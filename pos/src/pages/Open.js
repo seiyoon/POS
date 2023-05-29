@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../assets/pos_Logo.svg";
 import { ReactComponent as Trash } from "../assets/trash.svg";
@@ -9,12 +9,21 @@ import { ReactComponent as Trash } from "../assets/trash.svg";
 function Open() {
   const [category, setCategory] = useState("음료");
   const [selectedMenus, setSelectedMenus] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const categories = ["음료", "아이스크림", "디저트", "기타"];
 
   const ClickCategory = (c) => {
     setCategory((prevCategory) => (prevCategory === c ? "" : c));
   };
+
+  const updateTotalAmount = () => {
+    const total = selectedMenus.reduce((acc, menu) => {
+      return acc + menu.totalPrice;
+    }, 0);
+    setTotalAmount(total);
+  };
+
   const handleMenuClick = (menu) => {
     const existingMenu = selectedMenus.find(
       (selectedMenu) => selectedMenu.id === menu.id
@@ -41,6 +50,10 @@ function Open() {
     }
   };
 
+  useEffect(() => {
+    updateTotalAmount();
+  }, [selectedMenus]);
+
   const handleMenuDelete = (menu) => {
     setSelectedMenus((prevSelectedMenus) => {
       const updatedMenus = prevSelectedMenus
@@ -62,6 +75,8 @@ function Open() {
 
       return updatedMenus;
     });
+
+    updateTotalAmount();
   };
 
   const Beveragemenu = [
@@ -103,12 +118,11 @@ function Open() {
     { id: 34, name: "녹차 마들렌", price: 3800 },
     { id: 35, name: "휘낭시에", price: 3500 },
     { id: 36, name: "조각케이크", price: 6800 },
-    { id: 37, name: "홀케이크", price: 42000 },
   ];
   const Etcmenu = [
-    { id: 38, name: "생수", price: 1500 },
-    { id: 39, name: "숫자초", price: 800 },
-    { id: 40, name: "캐릭터초", price: 2000 },
+    { id: 37, name: "생수", price: 1500 },
+    { id: 38, name: "숫자초", price: 800 },
+    { id: 39, name: "캐릭터초", price: 2000 },
   ];
 
   return (
@@ -133,6 +147,9 @@ function Open() {
               </SelectedMenu>
             ))}
           </MenuList>
+          <TotalAmount>
+            총 금액 : <span>{totalAmount}</span>원
+          </TotalAmount>
         </LeftOpenContainer>
         <RightOpenContainer>
           <OpenCategory>
@@ -289,6 +306,19 @@ const SelectedMenu = styled.div`
   .trash {
     width: 22px;
     height: 22px;
+  }
+`;
+const TotalAmount = styled.div`
+  text-align: center;
+  margin-top: 20px;
+  font-family: "SUIT Variable";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  span {
+    font-weight: 800;
+    font-size: 25px;
+    color: ${COLOR.MAIN};
   }
 `;
 

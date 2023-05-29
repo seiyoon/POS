@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -182,6 +182,7 @@ const PayButton = styled.div`
   height: 20%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
 
   p {
     font-family: "SUIT Variable";

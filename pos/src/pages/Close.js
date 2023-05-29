@@ -14,8 +14,8 @@ function Close() {
         </Link>
       </StCloseHeader>
       <StCloseContainer>
-        <LeftHomeContainer></LeftHomeContainer>
-        <RightHomeContainer></RightHomeContainer>
+        <LeftCloseContainer></LeftCloseContainer>
+        <RightCloseContainer></RightCloseContainer>
       </StCloseContainer>
     </StClose>
   );
@@ -46,7 +46,7 @@ const StCloseContainer = styled.div`
   width: 100%;
   height: 100%;
 `;
-const LeftHomeContainer = styled.div`
+const LeftCloseContainer = styled.div`
   float: left;
   display: flex;
   justify-content: center;
@@ -55,7 +55,7 @@ const LeftHomeContainer = styled.div`
   height: 100%;
   background: black;
 `;
-const RightHomeContainer = styled.div`
+const RightCloseContainer = styled.div`
   float: right;
   display: flex;
   justify-content: center;

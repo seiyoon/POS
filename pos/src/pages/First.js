@@ -74,6 +74,7 @@ const StFirstContainer = styled.div`
   .error {
     margin-top: 5px;
     margin-left: 10px;
+    font-size: 15px;
     height: 20px;
     color: ${COLOR.DARK_GRAY};
   }

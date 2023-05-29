@@ -3,13 +3,17 @@ import { COLOR } from "../styles/color";
 
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { totalAmountState } from "../totalAmount";
 import { ReactComponent as Logo } from "../assets/pos_Logo.svg";
 import { ReactComponent as Trash } from "../assets/trash.svg";
 
 function Open() {
+  const navigate = useNavigate();
+
   const [category, setCategory] = useState("음료");
   const [selectedMenus, setSelectedMenus] = useState([]);
-  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useRecoilState(totalAmountState);
 
   const categories = ["음료", "아이스크림", "디저트", "기타"];
 
@@ -77,6 +81,12 @@ function Open() {
     });
 
     updateTotalAmount();
+  };
+
+  const gotoPay = () => {
+    if (totalAmount !== 0) {
+      navigate("/pay");
+    }
   };
 
   const Beveragemenu = [
@@ -152,7 +162,7 @@ function Open() {
           </TotalAmount>
           <PayButton>
             <LeftPay>취소</LeftPay>
-            <RightPay>결제하기</RightPay>
+            <RightPay onClick={gotoPay}>결제하기</RightPay>
           </PayButton>
         </LeftOpenContainer>
         <RightOpenContainer>
@@ -368,7 +378,7 @@ const RightOpenContainer = styled.div`
   float: right;
   width: 60%;
   height: 100%;
-  background-color: "#F6F6F6";
+  background-color: #fff5f5;
 `;
 const OpenCategory = styled.div`
   display: flex;

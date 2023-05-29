@@ -17,16 +17,20 @@ function Home() {
       </StHomeHeader>
       <StHomeContainer>
         <LeftHomeContainer>
-          <OpenButton>
-            <h1>개점하기</h1>
-            <Open className="open" />
-          </OpenButton>
+          <Link to="/open">
+            <OpenButton>
+              <h1>개점하기</h1>
+              <Open className="open" />
+            </OpenButton>
+          </Link>
         </LeftHomeContainer>
         <RightHomeContainer>
-          <CloseButton>
-            <h1>종료하기</h1>
-            <Close className="close" />
-          </CloseButton>
+          <Link to="/close">
+            <CloseButton>
+              <h1>종료하기</h1>
+              <Close className="close" />
+            </CloseButton>
+          </Link>
         </RightHomeContainer>
       </StHomeContainer>
     </StHome>
@@ -57,11 +61,14 @@ const StHomeContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  margin-top: 200px;
 `;
 const LeftHomeContainer = styled.div`
   float: left;
-  margin-right: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
 `;
 const OpenButton = styled.button`
   width: 280px;
@@ -87,7 +94,11 @@ const OpenButton = styled.button`
 `;
 const RightHomeContainer = styled.div`
   float: right;
-  margin-left: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
 `;
 const CloseButton = styled.button`
   width: 280px;

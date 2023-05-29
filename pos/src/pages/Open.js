@@ -150,6 +150,10 @@ function Open() {
           <TotalAmount>
             총 금액 : <span>{totalAmount}</span>원
           </TotalAmount>
+          <PayButton>
+            <LeftPay>취소</LeftPay>
+            <RightPay>결제하기</RightPay>
+          </PayButton>
         </LeftOpenContainer>
         <RightOpenContainer>
           <OpenCategory>
@@ -263,7 +267,7 @@ const MenuList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 600px;
+  height: 70%;
 `;
 const SelectedMenu = styled.div`
   display: grid;
@@ -310,7 +314,7 @@ const SelectedMenu = styled.div`
 `;
 const TotalAmount = styled.div`
   text-align: center;
-  margin-top: 20px;
+  margin-top: 50px;
   font-family: "SUIT Variable";
   font-style: normal;
   font-weight: 700;
@@ -321,11 +325,50 @@ const TotalAmount = styled.div`
     color: ${COLOR.MAIN};
   }
 `;
+const PayButton = styled.div`
+  display: flex;
+  margin-top: 50px;
+  width: 100%;
+  height: 15%;
+`;
+const LeftPay = styled.div`
+  float: left;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${COLOR.LIGHT_GRAY};
+  color: ${COLOR.DARK_GRAY};
+  font-family: "SUIT Variable";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  :hover {
+    background-color: ${COLOR.BRIGHT_GRAY};
+  }
+`;
+const RightPay = styled.div`
+  float: right;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${COLOR.MAIN};
+  color: ${COLOR.MAIN_WHITE};
+  font-family: "SUIT Variable";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  :hover {
+    background-color: ${COLOR.MAIN_HOVER};
+  }
+`;
 
 const RightOpenContainer = styled.div`
   float: right;
   width: 60%;
   height: 100%;
+  background-color: "#F6F6F6";
 `;
 const OpenCategory = styled.div`
   display: flex;

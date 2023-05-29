@@ -4,7 +4,7 @@ import { COLOR } from "../styles/color";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { totalAmountState } from "../totalAmount";
+import { totalAmountState } from "../core/totalAmount";
 import { ReactComponent as Logo } from "../assets/pos_Logo.svg";
 import { ReactComponent as Trash } from "../assets/trash.svg";
 
@@ -281,7 +281,7 @@ const MenuList = styled.div`
 `;
 const SelectedMenu = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 2fr 1.3fr 1fr 0.3fr;
   grid-gap: 10px;
   align-items: center;
   width: 80%;

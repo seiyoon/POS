@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRecoilValue } from "recoil";
-import { totalAmountState } from "../totalAmount";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { totalAmountState } from "../core/totalAmount";
+import { totalSalesState, totalPaymentCountState } from "../core/totalAmount";
 import { ReactComponent as Logo } from "../assets/pos_Logo.svg";
 import { ReactComponent as Back } from "../assets/back.svg";
 
@@ -17,6 +18,11 @@ function Pay() {
 
   const navigate = useNavigate();
 
+  const [totalSales, setTotalSales] = useRecoilState(totalSalesState);
+  const [totalPaymentCount, setTotalPaymentCount] = useRecoilState(
+    totalPaymentCountState
+  );
+
   const applyDiscount = () => {
     const discounted = totalAmount * 0.8; // 20% 할인된 금액 계산
     setDiscountedAmount(discounted);
@@ -25,15 +31,17 @@ function Pay() {
 
   const handlePayment = () => {
     toast.success("결제가 완료되었습니다.");
+
+    setTotalSales((prevTotalSales) => prevTotalSales + totalAmount);
+    setTotalPaymentCount((prevTotalPaymentCount) => prevTotalPaymentCount + 1);
+
+    setTimeout(() => {
+      navigate("/open");
+    }, 2000);
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/open");
-    }, 2500);
-
-    return () => clearTimeout(timer);
-  }, []);
+  console.log(totalSales);
+  console.log(totalPaymentCount);
 
   return (
     <StPay>

@@ -4,7 +4,7 @@ import { RecoilRoot } from "recoil";
 
 import First from "./pages/First";
 import Home from "./pages/Home";
-import Open from "./pages/Open";
+import Order from "./pages/Order";
 import Close from "./pages/Close";
 import Pay from "./pages/Pay";
 
@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<First />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/open" element={<Open />} />
+          <Route path="/open" element={<Order />} />
           <Route path="/close" element={<Close />} />
           <Route path="/pay" element={<Pay />} />
         </Routes>

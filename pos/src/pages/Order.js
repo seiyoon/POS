@@ -8,7 +8,7 @@ import { totalAmountState } from "../core/totalAmount";
 import { ReactComponent as Logo } from "../assets/pos_Logo.svg";
 import { ReactComponent as Trash } from "../assets/trash.svg";
 
-function Open() {
+function Order() {
   const navigate = useNavigate();
 
   const [category, setCategory] = useState("음료");
@@ -243,7 +243,7 @@ function Open() {
   );
 }
 
-export default Open;
+export default Order;
 
 const StOpen = styled.div`
   display: flex;

@@ -7,7 +7,7 @@ import { InputBox } from "../components/InputBox";
 import { Button } from "../components/Button";
 import { ReactComponent as Logo } from "../assets/pos_Logo.svg";
 
-function First() {
+function Login() {
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
@@ -47,7 +47,7 @@ function First() {
     </StFirst>
   );
 }
-export default First;
+export default Login;
 
 const StFirst = styled.div`
   display: flex;
